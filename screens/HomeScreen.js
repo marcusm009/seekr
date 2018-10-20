@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { WebBrowser, MapView } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
@@ -26,14 +26,47 @@ export default class HomeScreen extends React.Component {
           flex: 1
         }}
         initialRegion={{
+<<<<<<< HEAD
           latitude: 33.74825,
           longitude: -84.3880,
+=======
+          latitude: 37.78825,
+          longitude: -122.4324,
+>>>>>>> ec98b849088c13eb8a24314387007460caffc041
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
       />
+<<<<<<< HEAD
   };
 }
+=======
+    );
+  }
+
+  _maybeRenderDevelopmentModeWarning() {
+    if (__DEV__) {
+      const learnMoreButton = (
+        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
+          Learn more
+        </Text>
+      );
+
+      return (
+        <Text style={styles.developmentModeText}>
+          Development mode is enabled, your app will be slower but you can use useful development
+          tools. {learnMoreButton}
+        </Text>
+      );
+    } else {
+      return (
+        <Text style={styles.developmentModeText}>
+          You are not in development mode, your app will run at full speed.
+        </Text>
+      );
+    }
+  }
+>>>>>>> ec98b849088c13eb8a24314387007460caffc041
 
 class Leaderboard extends React.Component {
   render() {
