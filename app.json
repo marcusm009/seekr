@@ -6,6 +6,15 @@
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
+    "ios": {
+      "bundleIdentifier": "com.hackgt.cubr"
+    },
+    "android": {
+      "package": "com.hackgt.cubr",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyDbHUfclPFHMkvKrOowb-dcrf26u1gzrqI" }
+      }
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
