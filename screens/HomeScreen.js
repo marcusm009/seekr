@@ -12,24 +12,75 @@ import { WebBrowser, MapView } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
+var markers = require('../assets/markers.json');
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  constructor(props) {
+      super(props);
+
+      this.state = {
+        isLoading: true,
+        markers: [],
+      };
+    }
+
+  fetchMarkerData() {
+    this.setState({
+      isLoading: false,
+      markers: markers.markerList
+    });
+
+    //
+    // fetch('../assets/markers.json')
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       isLoading: false,
+    //       markers: responseJson.stationBeanList,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }
+
+  componentDidMount() {
+    this.fetchMarkerData();
+  }
+
   render() {
     return (
       <MapView
-        style={{
-          flex: 1
-        }}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
+          style={{ flex: 1 }}
+          region={{
+            latitude: 33.7746151,
+            longitude: -84.3960265,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+      >
+              {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
+           const coords = {
+               latitude: marker.latitude,
+               longitude: marker.longitude,
+           };
+
+           const metadata = `Posted by: ${marker.user}`;
+
+           return (
+               <MapView.Marker
+                  key={index}
+                  coordinate={coords}
+                  title={marker.locationName}
+                  description={metadata}
+               />
+           );
+        })}
+      </MapView>
     );
   }
 
