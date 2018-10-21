@@ -28,28 +28,36 @@ export default class HomeScreen extends React.Component {
 
   onNearingChallenge = challenge => {
     console.log('Got challenge', challenge);
-    this.setState({
-      currentPage: 'hunt',
-      currentChallenge: challenge,
-    });
+    if(this.state.currentPage != 'hunt') {
+      this.setState({
+        currentPage: 'hunt',
+        currentChallenge: challenge,
+      });
+    }
   }
 
   showMap = () => {
-    this.setState({
-      currentPage: 'map',
-    });
+    if(this.state.currentPage != 'map') {
+      this.setState({
+        currentPage: 'map',
+      });
+    }
   }
 
   showHunt = () => {
-    this.setState({
-      currentPage: 'hunt',
-    });
+    if(this.state.currentPage != 'hunt') {
+      this.setState({
+        currentPage: 'hunt',
+      });
+    }
   }
 
   showCamera = () => {
-    this.setState({
-      currentPage: 'camera',
-    });
+    if(this.state.currentPage != 'camera') {
+      this.setState({
+        currentPage: 'camera',
+      });
+    }
   }
 
   render() {
