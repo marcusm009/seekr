@@ -23,9 +23,11 @@ export default class HomeScreen extends React.Component {
     },
     headerTintColor: '#000',
     headerTitleStyle: {
-      // fontFamily: "Manifesto",
+      fontWeight: 'bold',
+      fontSize: '32',
     },
   };
+
   constructor(props) {
       super(props);
 

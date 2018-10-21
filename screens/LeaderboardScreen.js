@@ -3,6 +3,9 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
 export default class LeaderboardScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+  }
   render() {
     return (
       <ScrollView style={styles.container}>
