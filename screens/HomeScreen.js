@@ -11,7 +11,7 @@ import {
 import { Constants, Location, WebBrowser, MapView, Permissions } from 'expo';
 import Map from '../components/Map';
 import Hunt from '../components/Hunt';
-import CameraComponent from '../components/Camera';
+import CameraComponent from '../components/CameraComponent';
 
 import { MonoText } from '../components/StyledText';
 
@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
   onNearingChallenge = challenge => {
     console.log('Got challenge', challenge);
     this.setState({
-      currentPage: 'camera',
+      currentPage: 'hunt',
       currentChallenge: challenge,
     });
   }
@@ -67,6 +67,7 @@ export default class HomeScreen extends React.Component {
       return (<CameraComponent
           goToHunt={this.showHunt}
           challenge={this.state.currentChallenge}
+          huntImg={this.state.currentChallenge.img}
         ></CameraComponent>)
     } else {
       console.log('Bad state ' + this.state.currentPage);

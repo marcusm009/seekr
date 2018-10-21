@@ -20,7 +20,7 @@ export default class Hunt extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
-        <ToCameraButton/>
+        <ToCameraButton goToCamera={this.props.goToCamera}/>
         <Image source={this.props.huntImg}/>
       </View>
     );
