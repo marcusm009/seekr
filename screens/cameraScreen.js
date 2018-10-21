@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
+import axios from 'axios';
 import {
   Ionicons,
   MaterialIcons,
@@ -21,9 +22,34 @@ export default class CameraExample extends React.Component {
     }
 
   takePicture = () => {
+    console.log('takephoto');
     if (this.camera) {
+      console.log('taking photo');
       this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
     }
+  };
+
+  onPictureSaved = async photo => {
+    console.log('photo saved', photo);
+    const data = new FormData();
+    data.append('image1', {
+      uri: photo.uri,
+      type: 'image/jpeg',
+      name: 'img1.jpg'
+    });
+    data.append('image2', 'https://raw.githubusercontent.com/marcusmills0926/cubr/josh/_images/1.jpg');
+
+    axios.post('https://api.deepai.org/api/image-similarity', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Api-Key': '',
+      },
+    }).then(function (response) {
+      console.log(response);
+      console.log(response.body);
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 
   render() {
@@ -35,7 +61,7 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <View
               style={{
                 flex: 1,
