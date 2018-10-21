@@ -38,6 +38,7 @@ export default class App extends React.Component {
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
+        'Manifesto' : require('./assets/fonts/MANIFESTO.ttf'),
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
       }),
     ]);

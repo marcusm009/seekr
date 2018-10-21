@@ -13,18 +13,11 @@ export default class ToCameraButton extends React.Component {
 
   render() {
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          height: 100,
-          padding: 20,
-        }} >
         <TouchableOpacity
-          onPress={this.props.goToCamera()}
-          style={{ alignSelf: 'center' }} >
-          <Ionicons name="ios-radio-button-on" size={70} color="white" />
+          onPress={this.props.goToCamera}
+          style={{ alignItems: 'center', justifyContent: 'center'  }} >
+          <Ionicons name="ios-arrow-up" size={70} color="white" />
         </TouchableOpacity>
-      </View>
     );
   }
 }

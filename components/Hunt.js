@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Image,
+  ImageBackground,
   Platform,
   ScrollView,
   StyleSheet,
@@ -19,21 +20,34 @@ export default class Hunt extends React.Component {
   //TODO: overlay text and button correctly on image
   render() {
     return (
-      <View style = {{ flex: 1 }}>
-        <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
+      <ImageBackground source={this.props.huntImg} style =
+      {{width: '100%', height: '100%'}}>
+        <View style = {{ backgroundColor: 'transparent',
+        alignItems: 'center', justifyContent: 'flex-start'}}>
+        <Text style={styles.titleText}> You&#39;re close!
+        Seek some perspective... </Text>
+        </View>
+        <View style = { styles.bottomView }>
         <ToCameraButton goToCamera={this.props.goToCamera}/>
-        <Image source={this.props.huntImg} style={width:undefined,height:undefined}/>
-      </View>
+        </View>
+      </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Manifesto',
   },
   titleText: {
     fontSize: 20,
-    fontWeight: 'bold',
   },
+  bottomView:{
+     backgroundColor: 'transparent',
+     flexDirection: 'row',
+     height: 100,
+     position: 'absolute',
+     bottom: 10,
+     right: 40,
+   },
 });
