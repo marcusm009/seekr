@@ -24,10 +24,10 @@ export default class Hunt extends React.Component {
       {{width: '100%', height: '100%'}}>
         <View style = {{ backgroundColor: 'transparent',
         alignItems: 'center', justifyContent: 'flex-start'}}>
-        <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
+        <Text style={styles.titleText}> You&#39;re close!
+        Seek some perspective... </Text>
         </View>
-        <View style = {{ backgroundColor: 'transparent',
-      alignItems: 'center', position: 'absolute', bottom: 10,}}>
+        <View style = { styles.bottomView }>
         <ToCameraButton goToCamera={this.props.goToCamera}/>
         </View>
       </ImageBackground>
@@ -42,4 +42,12 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 20,
   },
+  bottomView:{
+     backgroundColor: 'transparent',
+     flexDirection: 'row',
+     height: 100,
+     position: 'absolute',
+     bottom: 10,
+     right: 40,
+   },
 });

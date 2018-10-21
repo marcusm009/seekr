@@ -20,7 +20,7 @@ export default class SettingsScreen extends React.Component {
     },
     headerTintColor: '#000',
     headerTitleStyle: {
-      fontSize: '32'
+      fontSize: '30'
     },
   };
   render() {

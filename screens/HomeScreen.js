@@ -19,13 +19,13 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Seekr',
     headerStyle: {
-      backgroundColor: '#fff'
+      backgroundColor: 'transparent'
     },
     headerTintColor: '#000',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: '32',
-    },
+    // headerTitleStyle: {
+    //   fontWeight: 'bold',
+    //   fontSize: '30',
+    // },
   };
 
   constructor(props) {

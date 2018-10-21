@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import axios from 'axios';
 import key from '../assets/apikey';
@@ -79,21 +79,14 @@ export default class CameraComponent extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <ToHuntButton huntImg={this.props.huntImg} goToHunt={this.props.goToHunt}/>
           <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-              }}>
-              <View style={{ flex: 0.4 }}>
+              <View style={ styles.bottomView }>
                 <TouchableOpacity
-                  onPress={this.takePicture}
-                  style={{ alignSelf: 'center' }} >
+                  onPress={this.takePicture} style = {{ alignSelf: 'center' }}>
                   <Ionicons name="ios-radio-button-on" size={70} color="white" />
                 </TouchableOpacity>
-              </View>
+              <ToHuntButton huntImg={this.props.huntImg}
+              goToHunt={this.props.goToHunt}/>
             </View>
             {message}
           </Camera>
@@ -102,3 +95,32 @@ export default class CameraComponent extends React.Component {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: 'Manifesto',
+  },
+  titleText: {
+    fontSize: 20,
+  },
+  bottomView:{
+     backgroundColor: 'transparent',
+     flexDirection: 'row',
+     width: '100%',
+     height: 70,
+     justifyContent: 'center',
+     alignItems: 'center',
+     alignSelf: 'center',
+     position: 'absolute',
+     bottom: 10,
+
+   },
+   bottomLeftView:{
+      backgroundColor: 'transparent',
+      flexDirection: 'row',
+      height: 200,
+      position: 'absolute',
+      bottom: 40,
+      left: 10
+    },
+});
