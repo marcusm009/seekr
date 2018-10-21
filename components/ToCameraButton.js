@@ -8,7 +8,7 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-export class ToCameraButton extends React.Component {
+export default class ToCameraButton extends React.Component {
 
 
   render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export class SuccessMessage extends React.Component {
+export default class SuccessMessage extends React.Component {
   
   render() {
     return (

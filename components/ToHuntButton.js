@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 
-export class ToHuntButton extends React.Component {
+export default class ToHuntButton extends React.Component {
 
   render() {
     return (
