@@ -59,6 +59,33 @@ export default class HomeScreen extends React.Component {
     this.fetchMarkerData();
   }
 
+  onLocationChange = e => {
+    latitude = e.nativeEvent.coordinate.latitude;
+    longitude = e.nativeEvent.coordinate.longitude;
+
+    function deg2rad(deg) {
+      return deg / 360 * 2 * Math.PI;
+    }
+
+    var R = 6371e3; // meters
+    var φ1 = deg2rad(latitude);
+
+    console.log('', latitude, longitude);
+    markers.markerList.forEach(function(element) {
+      var φ2 = deg2rad(element.latitude);
+      var Δφ = deg2rad(element.latitude-latitude);
+      var Δλ = deg2rad(element.longitude-longitude);
+
+      var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      var d = R * c;
+
+      console.log('Element ' + element.locationName + ' ' + d + 'm away');
+    });
+  };
+
   render() {
     const { hasLocationPermission } = this.state;
     if (hasLocationPermission === null) {
@@ -77,6 +104,8 @@ export default class HomeScreen extends React.Component {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
+            onUserLocationChange={this.onLocationChange}
+            provider={'google'}
         >
                 {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
              const coords = {

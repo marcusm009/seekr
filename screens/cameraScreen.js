@@ -75,6 +75,7 @@ export default class CameraExample extends React.Component {
                   style={{ alignSelf: 'center' }} >
                   <Ionicons name="ios-radio-button-on" size={70} color="white" />
                 </TouchableOpacity>
+              </View>
             </View>
           </Camera>
         </View>
