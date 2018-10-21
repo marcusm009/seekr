@@ -6,8 +6,9 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
+
+import View from 'react-native'
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
