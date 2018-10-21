@@ -4,8 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import LeaderboardScreen from '../screens/LeaderboardScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import cameraScreen from '../screens/cameraScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -18,19 +19,19 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-home${focused ? '' : '-outline'}`
+          : 'md-home'
       }
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const LeaderboardStack = createStackNavigator({
+  Leaderboard: LeaderboardScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+LeaderboardStack.navigationOptions = {
+  tabBarLabel: 'Leaderboard',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -48,13 +49,27 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+      name={Platform.OS === 'ios' ? `ios-settings${focused ? '' : '-outline'}` : 'md-options'}
+    />
+  ),
+};
+
+const CameraStack = createStackNavigator({
+  Camera: cameraScreen,
+});
+
+CameraStack.navigationOptions = {
+  tabBarLabel: 'Camera',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? `ios-camera${focused ? '' : '-outline'}` : 'md-camera'}
     />
   ),
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  LeaderboardStack,
   SettingsStack,
 });

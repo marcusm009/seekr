@@ -36,19 +36,13 @@ export default class CameraExample extends React.Component {
       return (
         <View style={{ flex: 1 }}>
           <Camera style={{ flex: 1 }} type={this.state.type}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-              }}>
               <View style={{ flex: 0.4 }}>
                 <TouchableOpacity
                   onPress={this.takePicture}
                   style={{ alignSelf: 'center' }} >
                   <Ionicons name="ios-radio-button-on" size={70} color="white" />
                 </TouchableOpacity>
-              </View>
+            </View>
           </Camera>
         </View>
       );
