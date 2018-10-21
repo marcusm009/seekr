@@ -12,6 +12,7 @@ import {
 } from '@expo/vector-icons';
 
 import SuccessMessage from './SuccessMessage';
+import ToHuntButton from './ToHuntButton';
 
 export default class CameraComponent extends React.Component {
   state = {
