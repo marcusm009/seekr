@@ -16,6 +16,16 @@ import CameraComponent from '../components/CameraComponent';
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Seekr',
+    headerStyle: {
+      backgroundColor: '#fff'
+    },
+    headerTintColor: '#000',
+    headerTitleStyle: {
+      fontFamily: 'Manifesto',
+    },
+  };
   constructor(props) {
       super(props);
 

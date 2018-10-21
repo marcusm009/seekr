@@ -14,7 +14,7 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import ToCameraButton from '../components/ToCameraButton';
 
-export default class Hunt extends React.Component {
+class Hunt extends React.Component {
 
   //TODO: overlay text and button correctly on image
   render() {
@@ -37,3 +37,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+module.exports = Hunt; 
