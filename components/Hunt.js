@@ -14,8 +14,12 @@ import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
 
+  //TODO
   render() {
     return (
-      //something here
+      <View style={{ flex: 1 }}>
+          <Image src=???>
+          </Image>
+      </View>
     );
   }
