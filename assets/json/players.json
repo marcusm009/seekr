@@ -1,0 +1,16 @@
+{
+  "playerList": [
+    {
+      "user": "Player123",
+      "score": 1
+    },
+    {
+      "user": "Player456",
+      "score": 2
+    },
+    {
+      "user": "Player789",
+      "score": 3
+    }
+  ]
+}

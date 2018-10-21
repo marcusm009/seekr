@@ -12,7 +12,7 @@ import { Constants, Location, WebBrowser, MapView, Permissions } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-var markers = require('../assets/markers.json');
+var markers = require('../assets/json/markers.json');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -66,7 +66,6 @@ export default class HomeScreen extends React.Component {
     } else if (hasLocationPermission === false) {
       return <Text>No access to location</Text>;
     } else {
-      console.log(JSON.stringify(this.state.location));
       return (
         <MapView
             style={{ flex: 1 }}
@@ -74,8 +73,8 @@ export default class HomeScreen extends React.Component {
             region={{
               latitude: 33.7746151,
               longitude: -84.3960265,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitudeDelta: 0.0122,
+              longitudeDelta: 0.0052,
             }}
         >
                 {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
