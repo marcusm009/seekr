@@ -70,6 +70,6 @@ CameraStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  CameraStack,
   LeaderboardStack,
+  SettingsStack,
 });

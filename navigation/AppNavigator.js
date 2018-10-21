@@ -1,10 +1,23 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator,
+  createDrawerNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons'
+
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
 
 import MainTabNavigator from './MainTabNavigator';
 
-export default createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator,
-});
+export default AppStackNavigator = createStackNavigator({
+  TabNavigator: {
+    screen: MainTabNavigator,
+    navigationOptions:({navigation}) => {
+      title: 'Seekr'
+    }
+  }
+})
