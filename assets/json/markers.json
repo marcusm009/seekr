@@ -1,0 +1,28 @@
+{
+  "markerList": [
+    {
+      "id": 1,
+      "locationName": "Test1",
+      "user": "Player123",
+      "latitude": 33.7746151,
+      "longitude": -84.3960265,
+      "message": "Hello!"
+    },
+    {
+      "id": 2,
+      "locationName": "Test2",
+      "user": "Player456",
+      "latitude": 33.7798104,
+      "longitude": -84.3950297,
+      "message": "Hello 2!"
+    },
+    {
+      "id": 3,
+      "locationName": "Test3",
+      "user": "Player789",
+      "latitude": 33.7749151,
+      "longitude": -84.3940297,
+      "message": "Hello 3!"
+    }
+  ]
+}

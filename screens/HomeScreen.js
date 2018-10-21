@@ -15,6 +15,8 @@ import CameraComponent from '../components/CameraComponent';
 
 import { MonoText } from '../components/StyledText';
 
+var markers = require('../assets/json/markers.json');
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Seekr',
@@ -24,7 +26,7 @@ export default class HomeScreen extends React.Component {
     headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
-      fontSize: '32',
+      fontSize: 32,
     },
   };
 
@@ -56,11 +58,43 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  showHunt = () => {
-    if(this.state.currentPage != 'hunt') {
-      this.setState({
-        currentPage: 'hunt',
-      });
+  render() {
+    const { hasLocationPermission } = this.state;
+    if (hasLocationPermission === null) {
+      return <View />;
+    } else if (hasLocationPermission === false) {
+      return <Text>No access to location</Text>;
+    } else {
+      return (
+        <MapView
+            style={{ flex: 1 }}
+            showsUserLocation
+            region={{
+              latitude: 33.7746151,
+              longitude: -84.3960265,
+              latitudeDelta: 0.0122,
+              longitudeDelta: 0.0052,
+            }}
+        >
+                {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
+             const coords = {
+                 latitude: marker.latitude,
+                 longitude: marker.longitude,
+             };
+
+             const metadata = `Posted by: ${marker.user}`;
+
+             return (
+                 <MapView.Marker
+                    key={index}
+                    coordinate={coords}
+                    title={marker.locationName}
+                    description={metadata}
+                 />
+             );
+          })}
+        </MapView>
+      );
     }
   }
 
