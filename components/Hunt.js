@@ -12,10 +12,15 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+export default class Hunt extends React.Component {
 
+  //TODO
   render() {
     return (
-      //something here
+      <View style={{ flex: 1 }}>
+          //<Image src={'temp'}>
+          //</Image>
+      </View>
     );
   }
+}

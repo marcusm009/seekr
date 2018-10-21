@@ -11,10 +11,12 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-export default class CameraExample extends React.Component {
+export default class CameraComponent extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    success: false,
+    failure: false,
   };
 
   async componentWillMount() {
@@ -47,13 +49,24 @@ export default class CameraExample extends React.Component {
       },
     }).then(function (response) {
       console.log(response);
-      console.log(response.body);
+      this.setState({success: response.distance <= 25 ? true : false});
+      this.setState({failure: response.distance <= 25 ? false : true})
     }).catch(function (error) {
       console.log(error);
     });
   };
 
+  renderMessage() {
+    if(this.state.success) {
+      return <SuccessMessage creatorMessage={'this is a message'}/>;
+    } else if(this.state.failure) {
+      return <FailureMessage/>;
+    }
+    return null;
+  }
+
   render() {
+    let message = this.renderMessage();
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
