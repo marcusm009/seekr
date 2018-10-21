@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import axios from 'axios';
+import key from '../assets/apikey';
 import {
   Ionicons,
   MaterialIcons,
@@ -10,10 +11,16 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-export default class CameraExample extends React.Component {
+import SuccessMessage from './SuccessMessage';
+import FailureMessage from './FailureMessage';
+import ToHuntButton from './ToHuntButton';
+
+export default class CameraComponent extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    success: false,
+    failure: false,
   };
 
   async componentWillMount() {
@@ -42,25 +49,37 @@ export default class CameraExample extends React.Component {
     axios.post('https://api.deepai.org/api/image-similarity', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Api-Key': '',
+        'Api-Key': key,
       },
     }).then(function (response) {
       console.log(response);
-      console.log(response.body);
+      this.setState({success: response.distance <= 25 ? true : false});
+      this.setState({failure: response.distance <= 25 ? false : true})
     }).catch(function (error) {
       console.log(error);
     });
   };
 
+  renderMessage() {
+    if(this.state.success) {
+      return <SuccessMessage creatorMessage={'TODO: get creator message'}/>;
+    } else if(this.state.failure) {
+      return <FailureMessage/>;
+    }
+    return null;
+  }
+
   render() {
+    let message = this.renderMessage();
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return (<Text>No access to camera</Text>);
     } else {
       return (
         <View style={{ flex: 1 }}>
+          <ToHuntButton huntImg={this.props.huntImg} goToHunt={this.props.goToHunt}/>
           <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <View
               style={{
@@ -76,6 +95,7 @@ export default class CameraExample extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
+            {message}
           </Camera>
         </View>
       );

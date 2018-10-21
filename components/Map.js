@@ -9,54 +9,90 @@ import {
   View,
 } from 'react-native';
 import { Constants, Location, WebBrowser, MapView, Permissions } from 'expo';
-import Map from '../components/Map';
-import Hunt from '../components/Hunt';
-import CameraComponent from '../components/CameraComponent';
 
 import { MonoText } from '../components/StyledText';
 
-var markers = require('../assets/json/markers.json');
+var markers = require('../assets/markers');
 
-export default class HomeScreen extends React.Component {
+export default class Map extends React.Component {
   static navigationOptions = {
-    title: 'Seekr',
-    headerStyle: {
-      backgroundColor: '#fff'
-    },
-    headerTintColor: '#000',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: 32,
-    },
+    header: null,
+  };
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this._getLocationAsync();
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
   };
 
   constructor(props) {
       super(props);
 
       this.state = {
-        currentPage: 'map',
-        currentChallenge: null,
+        isLoading: true,
+        markers: markers.markerList,
       };
 
     }
 
-  onNearingChallenge = challenge => {
-    console.log('Got challenge', challenge);
-    if(this.state.currentPage != 'hunt') {
-      this.setState({
-        currentPage: 'hunt',
-        currentChallenge: challenge,
-      });
-    }
+  fetchMarkerData() {
+    this.setState({
+      isLoading: false,
+      markers: markers.markerList
+    });
   }
 
-  showMap = () => {
-    if(this.state.currentPage != 'map') {
-      this.setState({
-        currentPage: 'map',
-      });
-    }
+  componentDidMount() {
+    this.fetchMarkerData();
   }
+
+  onLocationChange = e => {
+    latitude = e.nativeEvent.coordinate.latitude;
+    longitude = e.nativeEvent.coordinate.longitude;
+
+    function deg2rad(deg) {
+      return deg / 360 * 2 * Math.PI;
+    }
+
+    var R = 6371e3; // meters
+    var φ1 = deg2rad(latitude);
+
+    console.log('', latitude, longitude);
+    for (var i = 0; i < markers.markerList.length; i++) {
+      var element = markers.markerList[i];
+
+      var φ2 = deg2rad(element.latitude);
+      var Δφ = deg2rad(element.latitude-latitude);
+      var Δλ = deg2rad(element.longitude-longitude);
+
+      var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      var d = R * c;
+
+      console.log('Element ' + element.locationName + ' ' + d + 'm away');
+
+      if (d < 100 || d < 15.2) { // 50 feet
+        console.log('Within 50ft, notifying parent');
+        this.props.onNearingChallenge(element);
+        break;
+      }
+    }
+  };
 
   render() {
     const { hasLocationPermission } = this.state;
@@ -65,6 +101,7 @@ export default class HomeScreen extends React.Component {
     } else if (hasLocationPermission === false) {
       return <Text>No access to location</Text>;
     } else {
+      console.log(JSON.stringify(this.state.location));
       return (
         <MapView
             style={{ flex: 1 }}
@@ -72,9 +109,11 @@ export default class HomeScreen extends React.Component {
             region={{
               latitude: 33.7746151,
               longitude: -84.3960265,
-              latitudeDelta: 0.0122,
-              longitudeDelta: 0.0052,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
             }}
+            onUserLocationChange={this.onLocationChange}
+            provider={'google'}
         >
                 {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
              const coords = {
@@ -98,35 +137,38 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  showCamera = () => {
-    if(this.state.currentPage != 'camera') {
-      this.setState({
-        currentPage: 'camera',
-      });
+  _maybeRenderDevelopmentModeWarning() {
+    if (__DEV__) {
+      const learnMoreButton = (
+        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
+          Learn more
+        </Text>
+      );
+
+      return (
+        <Text style={styles.developmentModeText}>
+          Development mode is enabled, your app will be slower but you can use useful development
+          tools. {learnMoreButton}
+        </Text>
+      );
+    } else {
+      return (
+        <Text style={styles.developmentModeText}>
+          You are not in development mode, your app will run at full speed.
+        </Text>
+      );
     }
   }
 
-  render() {
-    if (this.state.currentPage == 'map') {
-      return (<Map
-        onNearingChallenge={this.onNearingChallenge}
-      ></Map>)
-    } else if (this.state.currentPage == 'hunt') {
-      return (<Hunt
-        goToMap={this.showMap}
-        goToCamera={this.showCamera}
-        huntImg={this.state.currentChallenge.img}
-      ></Hunt>)
-    } else if (this.state.currentPage == 'camera') {
-      return (<CameraComponent
-          goToHunt={this.showHunt}
-          challenge={this.state.currentChallenge}
-          huntImg={this.state.currentChallenge.img}
-        ></CameraComponent>)
-    } else {
-      console.log('Bad state ' + this.state.currentPage);
-    }
-  }
+  _handleLearnMorePress = () => {
+    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+  };
+
+  _handleHelpPress = () => {
+    WebBrowser.openBrowserAsync(
+      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+    );
+  };
 }
 
 const styles = StyleSheet.create({

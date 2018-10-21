@@ -9,7 +9,9 @@ var players = require('../assets/json/players.json');
 console.log(players.playerList);
 
 export default class LeaderboardScreen extends React.Component {
-
+  static navigationOptions = {
+    header: null,
+  }
   render() {
     return (
       <View style={styles.container}>
