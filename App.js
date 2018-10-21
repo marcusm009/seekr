@@ -1,43 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { MapView } from "expo";
-import { createDrawerNavigator } from 'react-navigation'
-
-import { createBottomTabNavigator } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
-
-export class Home extends React.Component {
-  render() {
-    return (
-      <MapView
-        style={{
-          flex: 1
-        }}
-        initialRegion={{
-          latitude: 33.74825,
-          longitude: -84.3880,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
-  )};
-}
-
-export class Leaderboard extends React.Component {
-  render() {
-    return (
-      <Text> "Waz up" </Text>
-    )
-  };
-}
-
-export class Settings extends React.Component {
-  render() {
-    return (
-      <Text> "Waz up" </Text>
-    )
-=======
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon, MapView } from 'expo';
@@ -65,7 +25,6 @@ export default class App extends React.Component {
         </View>
       );
     }
->>>>>>> ec98b849088c13eb8a24314387007460caffc041
   }
 
   _loadResourcesAsync = async () => {
@@ -95,43 +54,9 @@ export default class App extends React.Component {
   };
 }
 
-<<<<<<< HEAD
-export class createBottomTabNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name = "ios-home" color = {tintColor} size = {24} />
-      )
-    }
-  },
-  Leaderboard: Leaderboard,
-  Settings: {
-    screen: Settings,
-    navigationOptions: {
-      tabBarLabel: 'Settings',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name = "ios-settings" color = {tintColor} size = {24} />
-      )
-    }
-  }
-}, {
-  navigationOptions: {
-    tabBarVisible: true
-  },
-  tabBarOptions: {
-    activeTintColor: 'blue',
-    inactiveTintColor: 'grey'
-  }
-})
-
-export default createDrawerNavigator
-=======
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
 });
->>>>>>> ec98b849088c13eb8a24314387007460caffc041

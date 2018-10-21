@@ -12,8 +12,6 @@ import { WebBrowser, MapView } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-import { TabNavigator } from 'react-navigation'
-
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
@@ -26,21 +24,12 @@ export default class HomeScreen extends React.Component {
           flex: 1
         }}
         initialRegion={{
-<<<<<<< HEAD
-          latitude: 33.74825,
-          longitude: -84.3880,
-=======
           latitude: 37.78825,
           longitude: -122.4324,
->>>>>>> ec98b849088c13eb8a24314387007460caffc041
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
       />
-<<<<<<< HEAD
-  };
-}
-=======
     );
   }
 
@@ -66,41 +55,17 @@ export default class HomeScreen extends React.Component {
       );
     }
   }
->>>>>>> ec98b849088c13eb8a24314387007460caffc041
 
-class Leaderboard extends React.Component {
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <Text> We all win </Text>
-      </ScrollView>
-    )
+  _handleLearnMorePress = () => {
+    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+  };
+
+  _handleHelpPress = () => {
+    WebBrowser.openBrowserAsync(
+      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+    );
   };
 }
-
-class Settings extends React.Component {
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <Text> Change Something here </Text>
-      </ScrollView>
-    )
-  };
-}
-
-const HomeScreenTabNavigator = TabNavigator({
-  HomeScreen: {
-    screen: HomeScreen
-  },
-  Leaderboard: {
-    screen: Leaderboard
-  },
-  Settings: {
-    screen: SettingsScreen
-  }
-}, {
-  animationEnabled: true
-})
 
 const styles = StyleSheet.create({
   container: {
