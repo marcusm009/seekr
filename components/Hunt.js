@@ -23,19 +23,14 @@ export default class Hunt extends React.Component {
       <ImageBackground source={this.props.huntImg} style =
       {{width: '100%', height: '100%'}}>
         <View style = {{ backgroundColor: 'transparent',
-        alignItems: 'center', justifyContent: 'flex-start',}}>
+        alignItems: 'center', justifyContent: 'flex-start'}}>
         <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
         </View>
-        <View style = {{backgroundColor: 'transparent',
-      alignItems: 'center', justifyContent: 'flex-end', }}>
+        <View style = {{ backgroundColor: 'transparent',
+      alignItems: 'center', position: 'absolute', bottom: 10,}}>
         <ToCameraButton goToCamera={this.props.goToCamera}/>
-<<<<<<< HEAD
         </View>
       </ImageBackground>
-=======
-        <Image source={this.props.huntImg} style={width:undefined,height:undefined}/>
-      </View>
->>>>>>> b352f27a19f9dc3a329d752475e9601e8919d7bc
     );
   }
 }
