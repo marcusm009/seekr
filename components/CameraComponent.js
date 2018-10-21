@@ -62,9 +62,11 @@ export default class CameraComponent extends React.Component {
 
   renderMessage() {
     if(this.state.success) {
-      return <SuccessMessage creatorMessage={'TODO: get creator message'}/>;
+      alert('You've completed the challenge');
+      //return <SuccessMessage creatorMessage={'TODO: get creator message'}/>;
     } else if(this.state.failure) {
-      return <FailureMessage/>;
+      alert('Sorry, not close enough!');
+      //return <FailureMessage/>;
     }
     return null;
   }
