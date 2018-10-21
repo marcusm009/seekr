@@ -86,7 +86,7 @@ export default class Map extends React.Component {
 
       console.log('Element ' + element.locationName + ' ' + d + 'm away');
 
-      if (d < 1 || d < 15.2) { // 50 feet
+      if (d < 100 || d < 15.2) { // 50 feet
         console.log('Within 50ft, notifying parent');
         this.props.onNearingChallenge(element);
         break;

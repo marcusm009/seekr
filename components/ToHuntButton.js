@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, View, TouchableOpacity } from 'react-native';
+import { Image, View, TouchableOpacity } from 'react-native';
 
 export class SuccessMessage extends React.Component {
 
@@ -14,7 +14,7 @@ export class SuccessMessage extends React.Component {
         <TouchableOpacity
           onPress={this.props.goToHunt()}
           style={{ alignSelf: 'center' }} >
-          <Image source={require({this.props.huntImgSrc})}/>
+          <Image source={this.props.huntImg}/>
         </TouchableOpacity>
       </View>
     );
