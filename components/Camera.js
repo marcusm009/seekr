@@ -11,6 +11,8 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
+import SuccessMessage from './SuccessMessage';
+
 export default class CameraComponent extends React.Component {
   state = {
     hasCameraPermission: null,
@@ -58,7 +60,7 @@ export default class CameraComponent extends React.Component {
 
   renderMessage() {
     if(this.state.success) {
-      return <SuccessMessage creatorMessage={'this is a message'}/>;
+      return <SuccessMessage creatorMessage={'TODO: get creator message'}/>;
     } else if(this.state.failure) {
       return <FailureMessage/>;
     }
@@ -75,6 +77,7 @@ export default class CameraComponent extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
+          <ToHuntButton huntImgSrc={this.props.huntImgSrc}/>
           <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <View
               style={{
@@ -90,6 +93,7 @@ export default class CameraComponent extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
+            {message}
           </Camera>
         </View>
       );
