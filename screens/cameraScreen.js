@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import axios from 'axios';
+import key from '../assets/apikey';
 import {
   Ionicons,
   MaterialIcons,
@@ -42,7 +43,7 @@ export default class CameraExample extends React.Component {
     axios.post('https://api.deepai.org/api/image-similarity', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Api-Key': '',
+        'Api-Key': key,
       },
     }).then(function (response) {
       console.log(response);
