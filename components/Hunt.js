@@ -19,7 +19,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text style=styles.titleText> You''re close! Seek some perspective... </Text>
+        <Text style=styles.titleText> You&#39;re close! Seek some perspective... </Text>
         <ToCameraButton/>
         <Image source={require({this.props.huntImgSrc})}/>
       </View>
