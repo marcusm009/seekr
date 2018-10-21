@@ -62,16 +62,19 @@ export default class HomeScreen extends React.Component {
 
   render() {
     if (this.state.currentPage == 'map') {
+      console.log('Map ' + this.state.currentPage);
       return (<Map
         onNearingChallenge={this.onNearingChallenge}
       ></Map>)
     } else if (this.state.currentPage == 'hunt') {
+      console.log('Hunt' + this.state.currentPage);
       return (<Hunt
         goToMap={this.showMap}
         goToCamera={this.showCamera}
         huntImg={this.state.currentChallenge.img}
       ></Hunt>)
     } else if (this.state.currentPage == 'camera') {
+      console.log('Cameras' + this.state.currentPage);
       return (<CameraComponent
           goToHunt={this.showHunt}
           challenge={this.state.currentChallenge}
