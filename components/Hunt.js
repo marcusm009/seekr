@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
@@ -22,7 +22,7 @@ export default class Hunt extends React.Component {
       <View style = {{ flex: 1 }}>
         <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
         <ToCameraButton goToCamera={this.props.goToCamera}/>
-        <Image source={this.props.huntImg}/>
+        <Image source={this.props.huntImg} style={width:undefined,height:undefined}/>
       </View>
     );
   }
