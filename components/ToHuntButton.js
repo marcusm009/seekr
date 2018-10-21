@@ -8,12 +8,14 @@ export default class ToHuntButton extends React.Component {
       <View
         style={{
           flexDirection: 'row',
-          height: 100,
+          height: 50,
           padding: 20,
+          backgroundColor: 'transparent',
+          alignItems: 'center',
+          justifyContent: 'center'
         }} >
         <TouchableOpacity
-          onPress={this.props.goToHunt()}
-          style={{ alignSelf: 'center' }} >
+          onPress={this.props.goToHunt}>
           <Image source={this.props.huntImg}/>
         </TouchableOpacity>
       </View>

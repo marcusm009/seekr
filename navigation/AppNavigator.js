@@ -16,8 +16,8 @@ import MainTabNavigator from './MainTabNavigator';
 export default AppStackNavigator = createStackNavigator({
   TabNavigator: {
     screen: MainTabNavigator,
-    navigationOptions:({navigation}) => {
-      title: 'Seekr'
+    navigationOptions: {
+      header: null,
     }
   }
 })

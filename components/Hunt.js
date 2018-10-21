@@ -1,6 +1,7 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import {
   Image,
+  ImageBackground,
   Platform,
   ScrollView,
   StyleSheet,
@@ -14,28 +15,31 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import ToCameraButton from '../components/ToCameraButton';
 
-class Hunt extends React.Component {
+export default class Hunt extends React.Component {
 
   //TODO: overlay text and button correctly on image
   render() {
     return (
-      <View style = {{ flex: 1 }}>
+      <ImageBackground source={this.props.huntImg} style =
+      {{width: '100%', height: '100%'}}>
+        <View style = {{ backgroundColor: 'transparent',
+        alignItems: 'center', justifyContent: 'flex-start',}}>
         <Text style={styles.titleText}> You&#39;re close! Seek some perspective... </Text>
+        </View>
+        <View style = {{backgroundColor: 'transparent',
+      alignItems: 'center', justifyContent: 'flex-end', }}>
         <ToCameraButton goToCamera={this.props.goToCamera}/>
-        <Image source={this.props.huntImg}/>
-      </View>
+        </View>
+      </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
   baseText: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Manifesto',
   },
   titleText: {
     fontSize: 20,
-    fontWeight: 'bold',
   },
 });
-
-module.exports = Hunt; 
