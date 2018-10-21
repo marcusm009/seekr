@@ -8,29 +8,96 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser, MapView } from 'expo';
+import { Constants, Location, WebBrowser, MapView, Permissions } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+
+var markers = require('../assets/markers.json');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this._getLocationAsync();
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+  };
+
+  constructor(props) {
+      super(props);
+
+      this.state = {
+        isLoading: true,
+        markers: [],
+      };
+
+    }
+
+  fetchMarkerData() {
+    this.setState({
+      isLoading: false,
+      markers: markers.markerList
+    });
+  }
+
+  componentDidMount() {
+    this.fetchMarkerData();
+  }
+
   render() {
-    return (
-      <MapView
-        style={{
-          flex: 1
-        }}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
-    );
+    const { hasLocationPermission } = this.state;
+    if (hasLocationPermission === null) {
+      return <View />;
+    } else if (hasLocationPermission === false) {
+      return <Text>No access to location</Text>;
+    } else {
+      console.log(JSON.stringify(this.state.location));
+      return (
+        <MapView
+            style={{ flex: 1 }}
+            showsUserLocation
+            region={{
+              latitude: 33.7746151,
+              longitude: -84.3960265,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+        >
+                {this.state.isLoading ? null : this.state.markers.map((marker, index) => {
+             const coords = {
+                 latitude: marker.latitude,
+                 longitude: marker.longitude,
+             };
+
+             const metadata = `Posted by: ${marker.user}`;
+
+             return (
+                 <MapView.Marker
+                    key={index}
+                    coordinate={coords}
+                    title={marker.locationName}
+                    description={metadata}
+                 />
+             );
+          })}
+        </MapView>
+      );
+    }
   }
 
   _maybeRenderDevelopmentModeWarning() {
