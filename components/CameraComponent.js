@@ -79,7 +79,7 @@ export default class CameraComponent extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <ToHuntButton huntImg={this.props.huntImg} goToHunt={this.goToHunt}/>
+          <ToHuntButton huntImg={this.props.huntImg} goToHunt={this.props.goToHunt}/>
           <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <View
               style={{
