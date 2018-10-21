@@ -11,7 +11,8 @@ export class FailureMessage extends React.Component {
           height: 100,
           padding: 20,
         }}>
-        <Text style=styles.titleText> Sorry, not close enough! </Text>
+        <Text style={styles.titleText}> Sorry, not close enough! </Text>
+      </View>
     );
   }
 }

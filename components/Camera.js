@@ -12,6 +12,7 @@ import {
 } from '@expo/vector-icons';
 
 import SuccessMessage from './SuccessMessage';
+import FailureMessage from './FailureMessage';
 import ToHuntButton from './ToHuntButton';
 
 export default class CameraComponent extends React.Component {
@@ -78,7 +79,7 @@ export default class CameraComponent extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <ToHuntButton huntImgSrc={this.props.huntImgSrc}/>
+          <ToHuntButton huntImg={this.props.huntImg}/>
           <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
             <View
               style={{
