@@ -8,7 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser, MapView } from 'expo';
+import { Constants, Location, WebBrowser, MapView, Permissions } from 'expo';
+import Map from '../components/Map';
+import Hunt from '../components/Hunt';
+import CameraComponent from '../components/CameraComponent';
 
 import { MonoText } from '../components/StyledText';
 
@@ -25,54 +28,63 @@ export default class HomeScreen extends React.Component {
     },
   };
 
-  render() {
-    return (
-      <MapView
-        style={{
-          flex: 1
-        }}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
-    );
+  constructor(props) {
+      super(props);
+
+      this.state = {
+        currentPage: 'map',
+        currentChallenge: null,
+      };
+
+    }
+
+  onNearingChallenge = challenge => {
+    console.log('Got challenge', challenge);
+    this.setState({
+      currentPage: 'hunt',
+      currentChallenge: challenge,
+    });
   }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
+  showMap = () => {
+    this.setState({
+      currentPage: 'map',
+    });
+  }
 
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
+  showHunt = () => {
+    this.setState({
+      currentPage: 'hunt',
+    });
+  }
+
+  showCamera = () => {
+    this.setState({
+      currentPage: 'camera',
+    });
+  }
+
+  render() {
+    if (this.state.currentPage == 'map') {
+      return (<Map
+        onNearingChallenge={this.onNearingChallenge}
+      ></Map>)
+    } else if (this.state.currentPage == 'hunt') {
+      return (<Hunt
+        goToMap={this.showMap}
+        goToCamera={this.showCamera}
+        huntImg={this.state.currentChallenge.img}
+      ></Hunt>)
+    } else if (this.state.currentPage == 'camera') {
+      return (<CameraComponent
+          goToHunt={this.showHunt}
+          challenge={this.state.currentChallenge}
+          huntImg={this.state.currentChallenge.img}
+        ></CameraComponent>)
     } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
+      console.log('Bad state ' + this.state.currentPage);
     }
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
