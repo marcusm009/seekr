@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, View, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import {
   Ionicons,
   MaterialIcons,

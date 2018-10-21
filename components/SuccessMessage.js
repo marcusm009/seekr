@@ -11,9 +11,10 @@ export class SuccessMessage extends React.Component {
           height: 100,
           padding: 20,
         }}>
-        <Text style=styles.titleText> Good Job! </Text>
-        <Text style=styles.baseText> You've completed the challenge. Here's what the creator has to say: </Text>
-        <Text style=styles.baseText> { this.props.creatorMessage } <Text>
+        <Text style={styles.titleText}> Good Job! </Text>
+        <Text style={styles.baseText}> You've completed the challenge. Here's what the creator has to say: </Text>
+        <Text style={styles.baseText}> { this.props.creatorMessage } </Text>
+      </View>
     );
   }
 }

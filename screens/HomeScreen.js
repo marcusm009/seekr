@@ -61,7 +61,7 @@ export default class HomeScreen extends React.Component {
       return (<Hunt
         goToMap={this.showMap}
         goToCamera={this.showCamera}
-        huntImgSrc={'../assets/images/' + this.state.currentChallenge.id + '.jpg'}
+        huntImg={this.state.currentChallenge.img}
       ></Hunt>)
     } else if (this.state.currentPage == 'camera') {
       return (<CameraComponent
