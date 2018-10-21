@@ -75,7 +75,7 @@ export default class CameraComponent extends React.Component {
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return (<Text>No access to camera</Text>);
     } else {
       return (
         <View style={{ flex: 1 }}>

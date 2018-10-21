@@ -8,7 +8,7 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-export class SuccessMessage extends React.Component {
+export class ToCameraButton extends React.Component {
 
 
   render() {
